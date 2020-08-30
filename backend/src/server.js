@@ -16,6 +16,10 @@ app.get("/", (req, res) => {
 	res.send("Hello from express!");
 });
 
+app.get("/register", (req, res) => {
+	res.send("Welcome to Register \n");
+});
+
 try {
 	mongoose.connect(process.env.MONGO_DB_SECRET, {
 		useNewUrlParser: true,
