@@ -15,6 +15,7 @@ routes.get("/status", (req, res) => {
 //Event
 routes.post("/event", upload.single("thumbnail"), EventController.createEvent);
 routes.get("/event/:eventId", EventController.getEventById);
+routes.get("/events", EventController.getAllEvents);
 
 //User
 routes.post("/user/register", UserController.createUser);
