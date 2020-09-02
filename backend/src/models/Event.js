@@ -4,6 +4,7 @@ const EventSchema = new mongoose.Schema(
 	{
 		title: String,
 		description: String,
+		sport: String,
 		price: Number,
 		thumbnail: String,
 		date: Date,
