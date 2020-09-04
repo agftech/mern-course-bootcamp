@@ -32,6 +32,7 @@ module.exports = {
     'react/state-in-constructor': 'off',
     'react/static-property-placement': 'off',
     'react/jsx-props-no-spreading': 'off',
+    'react/no-unescaped-entities': 0,
     'react/prop-types': 'off',
     'no-param-reassign': 'off',
     'no-console': 'off',
