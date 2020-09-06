@@ -17,8 +17,6 @@ try {
 	mongoose.connect(process.env.MONGO_DB_SECRET, {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
-		useFindAndModify: false,
-		useCreateIndex: true,
 	});
 	console.log("MongoDb connected successfully!");
 } catch (error) {
