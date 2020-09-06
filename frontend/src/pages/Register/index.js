@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import api from '../../services/api';
 import { Button, Form, FormGroup, Container, Input } from 'reactstrap';
+
+import api from '../../services/api';
+
+import './styles.css';
 
 export default function Register({ history }) {
   const [email, setEmail] = useState('');

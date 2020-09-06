@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import api from '../../services/api';
 import { Container, Button, Form, FormGroup, Input } from 'reactstrap';
 
+import './styles.css';
+
 export default function Login({ history }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

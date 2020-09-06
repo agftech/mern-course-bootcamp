@@ -1,7 +1,11 @@
 import React, { useState, useMemo } from 'react';
-import api from '../../services/api';
 import { Container, Button, Form, FormGroup, Input, Label, Alert } from 'reactstrap';
+
+import api from '../../services/api';
+
 import cameraIcon from '../../assets/images/camera.svg';
+
+import './styles.css';
 
 export default function EventsPage() {
   const [title, setTitle] = useState('');
