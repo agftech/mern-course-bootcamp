@@ -29,47 +29,57 @@ export default function Register({ history }) {
 
   return (
     <Container>
+      <h2>Register:</h2>
       <p>
         Please <strong>Register</strong> for a new account
       </p>
       <Form onSubmit={handleSubmit}>
-        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-          <Input
-            type="text"
-            name="firstName"
-            id="firstName"
-            placeholder="Your first name"
-            onChange={(evt) => setFirstName(evt.target.value)}
-          />
+        <div className="input-group">
+          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+            <Input
+              type="text"
+              name="firstName"
+              id="firstName"
+              placeholder="Your first name"
+              onChange={(evt) => setFirstName(evt.target.value)}
+            />
+          </FormGroup>
+          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+            <Input
+              type="text"
+              name="lastName"
+              id="lastName"
+              placeholder="Your last name"
+              onChange={(evt) => setLastName(evt.target.value)}
+            />
+          </FormGroup>
+          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+            <Input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Your email"
+              onChange={(evt) => setEmail(evt.target.value)}
+            />
+          </FormGroup>
+          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+            <Input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Your password"
+              onChange={(evt) => setPassword(evt.target.value)}
+            />
+          </FormGroup>
+        </div>
+        <FormGroup>
+          <Button className="submit-btn">Submit</Button>
         </FormGroup>
-        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-          <Input
-            type="text"
-            name="lastName"
-            id="lastName"
-            placeholder="Your last name"
-            onChange={(evt) => setLastName(evt.target.value)}
-          />
+        <FormGroup>
+          <Button className="secondary-btn" onClick={() => history.push('/login')}>
+            Login instead?
+          </Button>
         </FormGroup>
-        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-          <Input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Your email"
-            onChange={(evt) => setEmail(evt.target.value)}
-          />
-        </FormGroup>
-        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-          <Input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Your password"
-            onChange={(evt) => setPassword(evt.target.value)}
-          />
-        </FormGroup>
-        <Button>Submit</Button>
       </Form>
     </Container>
   );
