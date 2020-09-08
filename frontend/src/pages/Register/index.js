@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, FormGroup, Container, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Container, Input, Alert } from 'reactstrap';
 
 import api from '../../services/api';
 
@@ -11,19 +11,35 @@ export default function Register({ history }) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    console.log('result of the submit', email, password, firstName, lastName);
 
-    const response = await api.post('/user/register', { email, password, firstName, lastName });
-    const userId = response.data._id || false;
+    if (email !== '' && password !== '' && firstName !== '' && lastName !== '') {
+      const response = await api.post('/user/register', { email, password, firstName, lastName });
+      const userId = response.data._id || false;
 
-    if (userId) {
-      localStorage.setItem('user', userId);
-      history.push('/dashboard');
+      if (userId) {
+        localStorage.setItem('user', userId);
+        history.push('/dashboard');
+      } else {
+        const { message } = response.data;
+        setError(true);
+        setErrorMessage(message);
+        setTimeout(() => {
+          setError(false);
+          setErrorMessage('');
+        }, 2000);
+      }
     } else {
-      const { message } = response.data;
-      console.log(message);
+      setError(true);
+      setErrorMessage('You need to fill all the Inputs');
+      setTimeout(() => {
+        setError(false);
+        setErrorMessage('');
+      }, 2000);
     }
   };
 
@@ -81,6 +97,13 @@ export default function Register({ history }) {
           </Button>
         </FormGroup>
       </Form>
+      {error && errorMessage ? (
+        <Alert className="event-validation" color="danger">
+          {errorMessage}
+        </Alert>
+      ) : (
+        ''
+      )}
     </Container>
   );
 }
