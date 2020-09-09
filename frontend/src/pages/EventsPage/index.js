@@ -132,7 +132,7 @@ export default function EventsPage({ history }) {
           <Button className="submit-btn">Submit</Button>
         </FormGroup>
         <FormGroup>
-          <Button className="secondary-btn" onClick={() => history.push('/dashboard')}>
+          <Button className="secondary-btn" onClick={() => history.push('/')}>
             Dashboard
           </Button>
         </FormGroup>
