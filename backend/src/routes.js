@@ -10,6 +10,7 @@ const RegistrationController = require('./controllers/RegistrationController')
 const ApprovalController = require('./controllers/ApprovalController')
 const RejectionController = require('./controllers/RejectionController')
 const uploadConfig = require('./config/upload')
+const verifyToken = require('./config/verifyToken')
 
 const upload = multer(uploadConfig)
 
@@ -36,14 +37,23 @@ routes.post(
 routes.post('/login', LoginController.store)
 
 //Dashboard
-routes.get('/dashboard', DashboardController.getAllEvents)
-routes.get('/dashboard/:sport', DashboardController.getAllEventsBySport)
-routes.get('/user/events', DashboardController.getEventsByUserId)
-routes.get('/event/:eventId', DashboardController.getEventById)
+routes.get('/dashboard', verifyToken, DashboardController.getAllEvents)
+routes.get(
+	'/dashboard/:sport',
+	verifyToken,
+	DashboardController.getAllEventsBySport
+)
+routes.get('/user/events', verifyToken, DashboardController.getEventsByUserId)
+routes.get('/event/:eventId', verifyToken, DashboardController.getEventById)
 
 //Events
-routes.post('/event', upload.single('thumbnail'), EventController.createEvent)
-routes.delete('/event/:eventId', EventController.delete)
+routes.post(
+	'/event',
+	verifyToken,
+	upload.single('thumbnail'),
+	EventController.createEvent
+)
+routes.delete('/event/:eventId', verifyToken, EventController.delete)
 
 //User
 routes.post('/user/register', UserController.createUser)
