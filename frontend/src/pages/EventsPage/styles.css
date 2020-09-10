@@ -2,7 +2,7 @@
   display: flex;
   text-align: initial;
 	align-items: center;
-	justify-content: center;
+  justify-content: center;
 }
 
 h1 {
@@ -12,13 +12,15 @@ h1 {
 label#thumbnail {
   margin-bottom: 20px;
   border: 1px;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 120px;
+  border: 1px solid lightgray;
+  border-radius: 4px;
 }
 
 label#thumbnail input {
