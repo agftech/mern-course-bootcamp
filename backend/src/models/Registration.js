@@ -1,20 +1,20 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
 const RegistrationSchema = new mongoose.Schema({
 	date: String,
 	approved: Boolean,
 	user: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: "User",
+		ref: 'User',
 	},
 	event: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: "Event",
+		ref: 'Event',
 	},
-});
+})
 
 module.exports = mongoose.model(
-	"Registration",
+	'Registration',
 	RegistrationSchema,
-	"Registrations"
-);
+	'Registrations'
+)
