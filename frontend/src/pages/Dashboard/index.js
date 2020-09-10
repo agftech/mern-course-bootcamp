@@ -8,7 +8,8 @@ import './styles.css';
 
 export default function Dashboard({ history }) {
   const [events, setEvents] = useState([]);
-  const user_id = localStorage.getItem('user');
+  const user = localStorage.getItem('user');
+  const user_id = localStorage.getItem('user_id');
   const [rSelected, setRSelected] = useState(null);
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -24,15 +25,19 @@ export default function Dashboard({ history }) {
 
   const myEventsHandler = async () => {
     setRSelected('myevents');
-    const response = await api.get('/user/events', { headers: { user_id } });
+    const response = await api.get('/user/events', { headers: { user: user } });
     setEvents(response.data);
   };
 
   const getEvents = async (filter) => {
-    const url = filter ? `/dashboard/${filter}` : '/dashboard';
-    const response = await api.get(url, { headers: { user_id } });
+    try {
+      const url = filter ? `/dashboard/${filter}` : '/dashboard';
+      const response = await api.get(url, { headers: { user: user } });
 
-    setEvents(response.data);
+      setEvents(response.data);
+    } catch (error) {
+      history.push('/login');
+    }
   };
 
   const deleteEventHandler = async (eventId) => {

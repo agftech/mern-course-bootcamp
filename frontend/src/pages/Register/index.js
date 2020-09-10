@@ -19,11 +19,12 @@ export default function Register({ history }) {
 
     if (email !== '' && password !== '' && firstName !== '' && lastName !== '') {
       const response = await api.post('/user/register', { email, password, firstName, lastName });
-      const userId = response.data._id || false;
+      const user = response.data.user || false;
+      const user_id = response.data.user_id || false;
 
-      if (userId) {
-        localStorage.setItem('user', userId);
-        history.push('/dashboard');
+      if (user && user_id) {
+        localStorage.setItem('user', user);
+        localStorage.setItem('user_id', user_id);
       } else {
         const { message } = response.data;
         setError(true);
