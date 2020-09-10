@@ -1,5 +1,17 @@
 import React, { useState, useMemo } from 'react';
-import { Container, Button, Form, FormGroup, Input, Label, Alert } from 'reactstrap';
+import {
+  Container,
+  Button,
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Alert,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+  ButtonDropdown,
+} from 'reactstrap';
 
 import api from '../../services/api';
 
@@ -12,10 +24,13 @@ export default function EventsPage({ history }) {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [thumbnail, setThumbnail] = useState(null);
-  const [sport, setSport] = useState('');
+  const [sport, setSport] = useState('Sport');
   const [date, setDate] = useState('');
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [dropdownOpen, setOpen] = useState(false);
+
+  const toggle = () => setOpen(!dropdownOpen);
 
   const preview = useMemo(() => {
     return thumbnail ? URL.createObjectURL(thumbnail) : null;
@@ -61,6 +76,8 @@ export default function EventsPage({ history }) {
     }
   };
 
+  const sportEventHandler = (sport) => setSport(sport);
+
   return (
     <Container>
       <h2>Create your Event</h2>
@@ -76,16 +93,6 @@ export default function EventsPage({ history }) {
               <Input type="file" onChange={(evt) => setThumbnail(evt.target.files[0])} />
               <img src={cameraIcon} style={{ maxWidth: '50px' }} alt="" />
             </Label>
-          </FormGroup>
-          <FormGroup>
-            <Label>Sport: </Label>
-            <Input
-              id="sport"
-              type="text"
-              value={sport}
-              placeholder={'Sport name'}
-              onChange={(evt) => setSport(evt.target.value)}
-            />
           </FormGroup>
           <FormGroup>
             <Label>Title: </Label>
@@ -113,7 +120,7 @@ export default function EventsPage({ history }) {
               id="price"
               type="text"
               value={price}
-              placeholder={'Event Price £0.00'}
+              placeholder={'Event Price $0.00'}
               onChange={(evt) => setPrice(evt.target.value)}
             />
           </FormGroup>
@@ -123,9 +130,22 @@ export default function EventsPage({ history }) {
               id="date"
               type="date"
               value={date}
-              placeholder={'Event Price £0.00'}
+              placeholder={'Event Price $0.00'}
               onChange={(evt) => setDate(evt.target.value)}
             />
+          </FormGroup>
+          <FormGroup>
+            <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
+              <Button id="caret" value={sport} disabled>
+                {sport}
+              </Button>
+              <DropdownToggle caret />
+              <DropdownMenu>
+                <DropdownItem onClick={() => sportEventHandler('running')}>running</DropdownItem>
+                <DropdownItem onClick={() => sportEventHandler('cycling')}>cycling</DropdownItem>
+                <DropdownItem onClick={() => sportEventHandler('swimming')}>swimming</DropdownItem>
+              </DropdownMenu>
+            </ButtonDropdown>
           </FormGroup>
         </div>
         <FormGroup>
