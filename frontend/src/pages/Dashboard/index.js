@@ -26,7 +26,7 @@ export default function Dashboard({ history }) {
   const myEventsHandler = async () => {
     setRSelected('myevents');
     const response = await api.get('/user/events', { headers: { user: user } });
-    setEvents(response.data);
+    setEvents(response.data.events);
   };
 
   const getEvents = async (filter) => {
@@ -34,7 +34,7 @@ export default function Dashboard({ history }) {
       const url = filter ? `/dashboard/${filter}` : '/dashboard';
       const response = await api.get(url, { headers: { user: user } });
 
-      setEvents(response.data);
+      setEvents(response.data.events);
     } catch (error) {
       history.push('/login');
     }
