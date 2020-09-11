@@ -39,7 +39,7 @@ export default function EventsPage({ history }) {
   const submitHandler = async (evt) => {
     evt.preventDefault();
 
-    const user_id = localStorage.getItem('user');
+    const user = localStorage.getItem('user');
 
     const eventData = new FormData();
 
@@ -59,7 +59,7 @@ export default function EventsPage({ history }) {
         date !== '' &&
         thumbnail !== null
       ) {
-        await api.post('/event', eventData, { headers: { user_id } });
+        await api.post('/event', eventData, { headers: { user } });
         setSuccess(true);
         setTimeout(() => {
           setSuccess(false);
