@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { Button, ButtonGroup, Alert } from 'reactstrap';
 import moment from 'moment';
+
+import socketio from 'socket.io-client';
 
 import api from '../../services/api';
 
@@ -13,10 +15,20 @@ export default function Dashboard({ history }) {
   const [rSelected, setRSelected] = useState(null);
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [messageHandler, setMessageHandler] = useState('');
+  const [eventsRequest, setEventsRequest] = useState([]);
 
   useEffect(() => {
     getEvents();
   }, []);
+
+  const socket = useMemo(() => socketio('http://localhost:8000/', { query: { user: user_id } }), [
+    user_id,
+  ]);
+
+  useEffect(() => {
+    socket.on('registration_request', (data) => setEventsRequest([...eventsRequest, data]));
+  }, [eventsRequest, socket]);
 
   const filterHandler = (query) => {
     setRSelected(query);
@@ -48,14 +60,18 @@ export default function Dashboard({ history }) {
     try {
       await api.delete(`/event/${eventId}`, { headers: { user: user } });
       setSuccess(true);
+      setMessageHandler('The event was deleted successfully!');
       setTimeout(() => {
         setSuccess(false);
         filterHandler(null);
+        setMessageHandler('');
       }, 2500);
     } catch (error) {
       setError(true);
+      setMessageHandler('Error when deleting event!');
       setTimeout(() => {
         setError(false);
+        setMessageHandler('');
       }, 2000);
     }
   };
@@ -132,16 +148,14 @@ export default function Dashboard({ history }) {
       </ul>
       {error ? (
         <Alert className="event-validation" color="danger">
-          {' '}
-          Error when deleting event!{' '}
+          {messageHandler}
         </Alert>
       ) : (
         ''
       )}
       {success ? (
         <Alert className="event-validation" color="success">
-          {' '}
-          The event was deleted successfully!
+          {messageHandler}
         </Alert>
       ) : (
         ''
