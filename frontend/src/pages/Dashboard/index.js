@@ -24,9 +24,13 @@ export default function Dashboard({ history }) {
   };
 
   const myEventsHandler = async () => {
-    setRSelected('myevents');
-    const response = await api.get('/user/events', { headers: { user: user } });
-    setEvents(response.data.events);
+    try {
+      setRSelected('myevents');
+      const response = await api.get('/user/events', { headers: { user: user } });
+      setEvents(response.data.events);
+    } catch (error) {
+      history.push('/login');
+    }
   };
 
   const getEvents = async (filter) => {
