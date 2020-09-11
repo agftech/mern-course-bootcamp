@@ -46,7 +46,7 @@ export default function Dashboard({ history }) {
 
   const deleteEventHandler = async (eventId) => {
     try {
-      await api.delete(`/event/${eventId}`);
+      await api.delete(`/event/${eventId}`, { headers: { user: user } });
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);
