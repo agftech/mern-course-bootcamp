@@ -19,7 +19,11 @@ routes.get('/status', (req, res) => {
 })
 
 //Registration
-routes.post('/registration/:eventId', RegistrationController.create)
+routes.post(
+	'/registration/:eventId',
+	verifyToken,
+	RegistrationController.create
+)
 routes.get(
 	'/registration/:registration_id',
 	RegistrationController.getRegistration
