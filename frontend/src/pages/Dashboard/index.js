@@ -60,6 +60,12 @@ export default function Dashboard({ history }) {
     }
   };
 
+  const logoutHandler = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('user_id');
+    history.push('/login');
+  };
+
   return (
     <>
       <div className="filter-panel">
@@ -95,6 +101,9 @@ export default function Dashboard({ history }) {
         <ButtonGroup>
           <Button color="warning" onClick={() => history.push('events')}>
             New Event
+          </Button>
+          <Button color="danger" onClick={logoutHandler}>
+            Logout
           </Button>
         </ButtonGroup>
       </div>
