@@ -25,6 +25,7 @@ export default function Register({ history }) {
       if (user && user_id) {
         localStorage.setItem('user', user);
         localStorage.setItem('user_id', user_id);
+        history.push('/');
       } else {
         const { message } = response.data;
         setError(true);
@@ -98,7 +99,7 @@ export default function Register({ history }) {
           </Button>
         </FormGroup>
       </Form>
-      {error && errorMessage ? (
+      {error ? (
         <Alert className="event-validation" color="danger">
           {errorMessage}
         </Alert>
