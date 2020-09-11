@@ -48,7 +48,7 @@ export default function Dashboard({ history }) {
   const getEvents = async (filter) => {
     try {
       const url = filter ? `/dashboard/${filter}` : '/dashboard';
-      const response = await api.get(url, { headers: { user: user } });
+      const response = await api.get(url, { headers: { user } });
 
       setEvents(response.data.events);
     } catch (error) {
@@ -80,6 +80,27 @@ export default function Dashboard({ history }) {
     localStorage.removeItem('user');
     localStorage.removeItem('user_id');
     history.push('/login');
+  };
+
+  const registrationRequestHandler = async (event) => {
+    try {
+      await api.post(`/registration/${event.id}`, {}, { headers: { user } });
+
+      setSuccess(true);
+      setMessageHandler(`The request for the event ${event.title} was successfully!`);
+      setTimeout(() => {
+        setSuccess(false);
+        filterHandler(null);
+        setMessageHandler('');
+      }, 2500);
+    } catch (error) {
+      setError(true);
+      setMessageHandler(`The request for the event ${event.title} wasn't successfully!`);
+      setTimeout(() => {
+        setError(false);
+        setMessageHandler('');
+      }, 2000);
+    }
   };
 
   return (
@@ -142,7 +163,9 @@ export default function Dashboard({ history }) {
             <span>Event Price: {parseFloat(event.price).toFixed(2)}</span>
             <span>Event Description: {event.description}</span>
             <br></br>
-            <Button color="primary">Subscribe</Button>
+            <Button color="primary" onClick={() => registrationRequestHandler(event)}>
+              Registration Request
+            </Button>
           </li>
         ))}
       </ul>
