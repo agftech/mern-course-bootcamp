@@ -26,6 +26,8 @@ export default function Dashboard({ history }) {
   const [messageHandler, setMessageHandler] = useState('');
   const [eventsRequest, setEventsRequest] = useState([]);
   const [dropdownOpen, setDropDownOpen] = useState(false);
+  const [eventRequestMessage, setEventRequestMessage] = useState('');
+  const [eventRequestSuccess, setEventRequestSuccess] = useState(false);
 
   const toggle = () => setDropDownOpen(!dropdownOpen);
 
@@ -108,6 +110,20 @@ export default function Dashboard({ history }) {
     }
   };
 
+  const acceptEventHandler = async (eventId) => {
+    try {
+      await api.post(`/registration/${eventId}/approvals`, {}, { headers: { user } });
+      setEventRequestSuccess(true);
+      setEventRequestMessage('Event approved successfully!');
+      setTimeout(() => {
+        setEventRequestSuccess(false);
+        setEventRequestMessage('');
+      }, 2000);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <span>
@@ -120,7 +136,7 @@ export default function Dashboard({ history }) {
                   <strong>{request.event.title}</strong>
                 </div>
                 <ButtonGroup>
-                  <Button color="secondary" onClick={() => {}}>
+                  <Button color="secondary" onClick={() => acceptEventHandler(request._id)}>
                     Accept
                   </Button>
                   <Button color="danger" onClick={() => {}}>
@@ -131,6 +147,7 @@ export default function Dashboard({ history }) {
             );
           })}
         </ul>
+        {eventRequestSuccess ? <Alert color="success"> {eventRequestMessage}</Alert> : ''}
       </span>
       <div className="filter-panel">
         <Dropdown isOpen={dropdownOpen} toggle={toggle}>
