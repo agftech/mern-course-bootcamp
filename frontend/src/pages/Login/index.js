@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import api from '../../services/api';
 import { Container, Button, Form, FormGroup, Input, Alert } from 'reactstrap';
+import { UserContext } from '../../contexts/ContextUser';
 
 import './styles.css';
 
 export default function Login({ history }) {
+  const { setIsloggedIn } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
@@ -12,7 +14,6 @@ export default function Login({ history }) {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    //console.log('result of the submit', email, password);
     const response = await api.post('/login', { email, password });
     const user_id = response.data.user_id || false;
     const user = response.data.user || false;
@@ -21,6 +22,7 @@ export default function Login({ history }) {
       if (user && user_id) {
         localStorage.setItem('user', user);
         localStorage.setItem('user_id', user_id);
+        setIsloggedIn(true);
         history.push('/');
       } else {
         const { message } = response.data;
@@ -30,7 +32,6 @@ export default function Login({ history }) {
           setError(false);
           setErrorMessage('');
         }, 2000);
-        //console.log(message);
       }
     } catch (error) {}
   };

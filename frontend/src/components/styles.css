@@ -1,0 +1,13 @@
+.navbar-nav {
+  display: flex;
+  flex-direction: column;
+  text-align: initial;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  padding: 5px;
+  max-width: 25%;
+}
+
+a {
+  color: #212529;
+}
