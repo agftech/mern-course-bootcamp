@@ -105,6 +105,29 @@ export default function Dashboard({ history }) {
 
   return (
     <>
+      <span>
+        <ul className="notifications">
+          {eventsRequest.map((request) => {
+            console.log(request);
+            return (
+              <li key={request._id}>
+                <div>
+                  <strong>{request.user.email} </strong> is requesting to register to your Event{' '}
+                  <strong>{request.event.title}</strong>
+                </div>
+                <ButtonGroup>
+                  <Button color="secondary" onClick={() => {}}>
+                    Accept
+                  </Button>
+                  <Button color="danger" onClick={() => {}}>
+                    Cancel
+                  </Button>
+                </ButtonGroup>
+              </li>
+            );
+          })}
+        </ul>
+      </span>
       <div className="filter-panel">
         <ButtonGroup>
           <Button color="primary" onClick={() => filterHandler(null)} active={rSelected === null}>
