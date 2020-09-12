@@ -115,6 +115,7 @@ export default function Dashboard({ history }) {
       await api.post(`/registration/${eventId}/approvals`, {}, { headers: { user } });
       setEventRequestSuccess(true);
       setEventRequestMessage('Event approved successfully!');
+      removeNotificationFromDashboard(eventId);
       setTimeout(() => {
         setEventRequestSuccess(false);
         setEventRequestMessage('');
@@ -129,6 +130,7 @@ export default function Dashboard({ history }) {
       await api.post(`/registration/${eventId}/rejections`, {}, { headers: { user } });
       setEventRequestSuccess(true);
       setEventRequestMessage('Event rejected successfully!');
+      removeNotificationFromDashboard(eventId);
       setTimeout(() => {
         setEventRequestSuccess(false);
         setEventRequestMessage('');
@@ -136,6 +138,11 @@ export default function Dashboard({ history }) {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const removeNotificationFromDashboard = (eventId) => {
+    const newEvents = eventsRequest.filter((event) => event._id !== eventId);
+    setEventsRequest(newEvents);
   };
 
   return (
