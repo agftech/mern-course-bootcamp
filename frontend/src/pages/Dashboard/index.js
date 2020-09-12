@@ -1,5 +1,13 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { Button, ButtonGroup, Alert } from 'reactstrap';
+import {
+  Button,
+  ButtonGroup,
+  Alert,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+} from 'reactstrap';
 import moment from 'moment';
 
 import socketio from 'socket.io-client';
@@ -17,6 +25,9 @@ export default function Dashboard({ history }) {
   const [success, setSuccess] = useState(false);
   const [messageHandler, setMessageHandler] = useState('');
   const [eventsRequest, setEventsRequest] = useState([]);
+  const [dropdownOpen, setDropDownOpen] = useState(false);
+
+  const toggle = () => setDropDownOpen(!dropdownOpen);
 
   useEffect(() => {
     getEvents();
@@ -76,12 +87,6 @@ export default function Dashboard({ history }) {
     }
   };
 
-  const logoutHandler = () => {
-    localStorage.removeItem('user');
-    localStorage.removeItem('user_id');
-    history.push('/login');
-  };
-
   const registrationRequestHandler = async (event) => {
     try {
       await api.post(`/registration/${event.id}`, {}, { headers: { user } });
@@ -108,7 +113,6 @@ export default function Dashboard({ history }) {
       <span>
         <ul className="notifications">
           {eventsRequest.map((request) => {
-            console.log(request);
             return (
               <li key={request._id}>
                 <div>
@@ -129,6 +133,32 @@ export default function Dashboard({ history }) {
         </ul>
       </span>
       <div className="filter-panel">
+        <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+          <DropdownToggle color="primary" caret>
+            Filter
+          </DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem onClick={() => filterHandler(null)} active={rSelected === null}>
+              All Sports
+            </DropdownItem>
+            <DropdownItem onClick={myEventsHandler} active={rSelected === 'myevents'}>
+              My Events
+            </DropdownItem>
+            <DropdownItem onClick={() => filterHandler('running')} active={rSelected === 'running'}>
+              Running
+            </DropdownItem>
+            <DropdownItem onClick={() => filterHandler('cycling')} active={rSelected === 'cycling'}>
+              Cycling
+            </DropdownItem>
+            <DropdownItem
+              color="primary"
+              onClick={() => filterHandler('swimming')}
+              active={rSelected === 'swimming'}
+            >
+              Swimming
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
         <ButtonGroup>
           <Button color="primary" onClick={() => filterHandler(null)} active={rSelected === null}>
             All Sports
@@ -161,9 +191,6 @@ export default function Dashboard({ history }) {
         <ButtonGroup>
           <Button color="warning" onClick={() => history.push('events')}>
             New Event
-          </Button>
-          <Button color="danger" onClick={logoutHandler}>
-            Logout
           </Button>
         </ButtonGroup>
       </div>
