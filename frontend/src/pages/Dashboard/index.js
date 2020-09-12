@@ -124,6 +124,20 @@ export default function Dashboard({ history }) {
     }
   };
 
+  const rejectEventHandler = async (eventId) => {
+    try {
+      await api.post(`/registration/${eventId}/rejections`, {}, { headers: { user } });
+      setEventRequestSuccess(true);
+      setEventRequestMessage('Event rejected successfully!');
+      setTimeout(() => {
+        setEventRequestSuccess(false);
+        setEventRequestMessage('');
+      }, 2000);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <span>
@@ -139,8 +153,8 @@ export default function Dashboard({ history }) {
                   <Button color="secondary" onClick={() => acceptEventHandler(request._id)}>
                     Accept
                   </Button>
-                  <Button color="danger" onClick={() => {}}>
-                    Cancel
+                  <Button color="danger" onClick={() => rejectEventHandler(request._id)}>
+                    Reject
                   </Button>
                 </ButtonGroup>
               </li>
