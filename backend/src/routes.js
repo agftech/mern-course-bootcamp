@@ -30,6 +30,7 @@ routes.get(
 )
 routes.post(
 	'/registration/:registration_id/approvals',
+	verifyToken,
 	ApprovalController.approval
 )
 routes.post(
