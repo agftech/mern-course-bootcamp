@@ -35,6 +35,7 @@ routes.post(
 )
 routes.post(
 	'/registration/:registration_id/rejections',
+	verifyToken,
 	RejectionController.rejection
 )
 
