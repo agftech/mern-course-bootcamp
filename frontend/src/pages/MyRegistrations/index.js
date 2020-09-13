@@ -45,8 +45,16 @@ export default function MyRegistrations() {
     <ul className="events">
       {myEvents.map((event) => (
         <li key={event._id}>
-          <div>
+          <div className="events-status">
             <em>Event:</em> <strong>{event.eventTitle}</strong>
+            <span>
+              <em>Status: </em>
+              <span
+                className={event.approved !== undefined ? isApproved(event.approved) : 'Pending'}
+              >
+                {event.approved !== undefined ? isApproved(event.approved) : 'Pending'}
+              </span>
+            </span>
           </div>
           <div className="events-details">
             <span>
@@ -57,14 +65,6 @@ export default function MyRegistrations() {
             </span>
             <span>
               <em>User Email:</em> {event.userEmail}
-            </span>
-            <span>
-              <em>Status:</em>
-              <span
-                className={event.approved !== undefined ? isApproved(event.approved) : 'Pending'}
-              >
-                {event.approved !== undefined ? isApproved(event.approved) : 'Pending'}
-              </span>
             </span>
           </div>
           <ButtonGroup>
