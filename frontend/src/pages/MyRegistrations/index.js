@@ -4,6 +4,8 @@ import { Button, ButtonGroup } from 'reactstrap';
 
 import api from '../../services/api';
 
+import './styles.css';
+
 export default function MyRegistrations() {
   const [myEvents, setMyEvents] = useState([]);
   const user = localStorage.getItem('user');
@@ -20,17 +22,25 @@ export default function MyRegistrations() {
   };
 
   return (
-    <ul>
+    <ul className="events">
       {myEvents.map((event) => (
         <li key={event._id}>
           <div>
-            <strong>{event.eventTitle}</strong>
+            <em>Event:</em> <strong>{event.eventTitle}</strong>
           </div>
-          <div>
-            <span>Event Date: {moment(event.eventDate).format('l')}</span>
-            <span>Event Price: ${parseFloat(event.eventPrice).toFixed(2)}</span>
-            <span>User Email: {event.userEmail}</span>
-            <span>Status:</span>
+          <div className="events-details">
+            <span>
+              <em>Event Date:</em> {moment(event.eventDate).format('l')}
+            </span>
+            <span>
+              <em>Event Price:</em> ${parseFloat(event.eventPrice).toFixed(2)}
+            </span>
+            <span>
+              <em>User Email:</em> {event.userEmail}
+            </span>
+            <span>
+              <em>Status:</em>
+            </span>
           </div>
           <ButtonGroup>
             <Button
