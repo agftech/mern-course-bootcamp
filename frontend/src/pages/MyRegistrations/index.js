@@ -23,6 +23,24 @@ export default function MyRegistrations() {
 
   const isApproved = (approved) => (approved === true ? 'Approved' : 'Rejected');
 
+  const acceptEventHandler = async (eventId) => {
+    try {
+      await api.post(`/registration/${eventId}/approvals`, {}, { headers: { user } });
+      getMyEvents();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const rejectEventHandler = async (eventId) => {
+    try {
+      await api.post(`/registration/${eventId}/rejections`, {}, { headers: { user } });
+      getMyEvents();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <ul className="events">
       {myEvents.map((event) => (
@@ -53,14 +71,14 @@ export default function MyRegistrations() {
             <Button
               disabled={event.approved === true || event.approved === false ? true : false}
               color="secondary"
-              onClick={() => {}}
+              onClick={() => acceptEventHandler(event._id)}
             >
               Accept
             </Button>
             <Button
               disabled={event.approved === true || event.approved === false ? true : false}
               color="danger"
-              onClick={() => {}}
+              onClick={() => rejectEventHandler(event._id)}
             >
               Reject
             </Button>
