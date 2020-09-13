@@ -25,6 +25,11 @@ routes.post(
 	RegistrationController.create
 )
 routes.get(
+	'/registration',
+	verifyToken,
+	RegistrationController.getMyRegistrations
+)
+routes.get(
 	'/registration/:registration_id',
 	RegistrationController.getRegistration
 )
