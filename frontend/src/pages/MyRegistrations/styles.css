@@ -21,3 +21,27 @@
 .events-details span {
   margin: 0.5rem;
 }
+
+.Approved {
+  color: green;
+  border: 1px solid green;
+  box-shadow: 3px 2px 2px green;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.Rejected {
+  color: red;
+  border: 1px solid red;
+  box-shadow: 3px 2px 2px red;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.Pending {
+  color: blue;
+  border: 1px solid blue;
+  box-shadow: 3px 2px 2px blue;
+  border-radius: 4px;
+  padding: 5px;
+}

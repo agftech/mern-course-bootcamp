@@ -21,6 +21,8 @@ export default function MyRegistrations() {
     } catch (error) {}
   };
 
+  const isApproved = (approved) => (approved === true ? 'Approved' : 'Rejected');
+
   return (
     <ul className="events">
       {myEvents.map((event) => (
@@ -40,6 +42,11 @@ export default function MyRegistrations() {
             </span>
             <span>
               <em>Status:</em>
+              <span
+                className={event.approved !== undefined ? isApproved(event.approved) : 'Pending'}
+              >
+                {event.approved !== undefined ? isApproved(event.approved) : 'Pending'}
+              </span>
             </span>
           </div>
           <ButtonGroup>
