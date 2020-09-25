@@ -28,82 +28,80 @@
 
 <p align="center">
   <a href="#package-platforms">Platforms</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#rocket-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#cloud-backend">Backend Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#computer-frontend">Frontend Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#memo-license">License</a>
 </p>
-> ---
 
 > ---
 > ## :package: _**Platforms**_:
 >
-> - :cloud: [Backend](https://github.com/agftech/mern-course-bootcamp/tree/master/backend)
-> - :computer: [Frontend](https://github.com/agftech/mern-course-bootcamp/tree/master/frontend)
+> - :cloud: [Backend code](https://github.com/agftech/mern-course-bootcamp/tree/master/backend)
+> - :computer: [Frontend code](https://github.com/agftech/mern-course-bootcamp/tree/master/frontend)
 >
 > ---
 
 > ---
-> #### ☁️ `BACKEND:`
+> ## :cloud: _**Backend**_:
 >
 > > <img src="https://img.shields.io/badge/modules-SECURITY:-important"/>
->
+> >
 >> - **[cors](https://github.com/expressjs/cors/):** _`yarn add cors`_
 >> - **[bcrypt](https://github.com/kelektiv/node.bcrypt.js/):** _`yarn add bcrypt`_
 >
 > > <img src="https://img.shields.io/badge/environment-SETTING:-red"/>
->
+> >
 >> - **[dotenv](https://github.com/motdotla/dotenv/):** _`yarn add dotenv`_
 >
 > > <img src="https://img.shields.io/badge/routing-HTTP SERVERS:-blue"/>
->
+> >
 >> - **[express](https://expressjs.com/):** _`yarn add express`_
 >
 > > <img src="https://img.shields.io/badge/authentication-JWT:-green"/>
->
+> >
 >> - **[jsonwebtoken](https://github.com/auth0/node-jsonwebtoken/):** _`yarn add jsonwebtoken`_
 >
 > > <img src="https://img.shields.io/badge/database-MONGO DB:-589636"/>
->
->
+> >
 >> - **[mongoose](https://mongoosejs.com/):** _`yarn add mongoose`_
 >
 > > <img src="https://img.shields.io/badge/middleware -MULTIPART/FORMDATA:-red"/>
->
+> >
 >> - **[multer](https://github.com/expressjs/multer/):** _`yarn add multer`_
 >
 > > <img src="https://img.shields.io/badge/communication-BACK&FRONT:-white"/>
->
+> >
 >> - **[socket](https://socket.io/):** _`yarn add socket.io`_
 >
 > ---
 
 > ---
-> #### 💻 `FRONTEND:`
+> ## :computer: _**Frontend**_:
 >
 > > <img src="https://img.shields.io/badge/http-CLIENT:-blue"/>
->
+> >
 >> - **[axios](https://github.com/axios/axios):** _`yarn add axios`_
 >
 > > <img src="https://img.shields.io/badge/framework-INTERFACE:-7952b3"/>
->
+> >
 >> - **[bootstrap](https://getbootstrap.com/):** _`yarn add bootstrap`_
-
+>>
 >> - **[reactstrap](https://reactstrap.github.io):** _`yarn add reactstrap`_
 >
 > > <img src="https://img.shields.io/badge/library-DATES:-454545"/>
->
+> >
 >> - **[moment](https://github.com/moment/moment/):** _`yarn add moment`_
 >
 > > <img src="https://img.shields.io/badge/library-JAVASCRIPT:-61dafb"/>
->
+> >
 >> - **[react](https://reactjs.org/):** _`yarn create react-app my-app`_
 >>> - `react-dom`;
 >>> - `react-router-dom`;
 >>> - `react-scripts`;
 >
 > > <img src="https://img.shields.io/badge/communication-FRONT&BACK:-white"/>
->
->> - **[socket.io-client](https://github.com/socketio/socket.io-client):** 
-_`yarn add socket.io-client`_
+> >
+>> - **[socket.io-client](https://github.com/socketio/socket.io-client):** _`yarn add socket.io-client`_
 >
 
 > ---
@@ -117,3 +115,4 @@ _`yarn add socket.io-client`_
 - <a href="https://github.com/agftech" target="_blank">
     <img alt="Made with ♥ by AGF Tech" src="https://img.shields.io/badge/Made with ♥ by -AGFTECH's-589636">
   </a>
+> ---
